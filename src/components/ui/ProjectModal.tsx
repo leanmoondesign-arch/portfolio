@@ -192,7 +192,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                     <div className="flex items-center justify-between mb-14 pt-8">
                       <div className="flex items-center gap-3 text-primary">
                         <ImageIcon className="w-5 h-5" />
-                        <h3 className="font-bold uppercase tracking-[0.2em] text-xs">Visual Showcase</h3>
+                        <h3 className="font-bold uppercase tracking-[0.2em] text-xs">Preview</h3>
                       </div>
 
                       {validImages.length > 1 && (
