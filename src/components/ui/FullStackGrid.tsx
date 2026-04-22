@@ -1,5 +1,6 @@
 import React from 'react';
 import { Claude, Gemini, Github, OpenAI } from '@lobehub/icons';
+import { Sparkles } from 'lucide-react';
 
 export const stackTools = [
   // Estrategia & Diseño
@@ -40,8 +41,6 @@ const devTools: LocalTool[] = [
   { name: 'Firebase', filename: 'firebase.svg', color: '#FFCA28' },
   { name: 'Vercel', filename: 'vercel.svg', color: 'var(--text-primary)' },
 ];
-
-import { Sparkles } from 'lucide-react';
 
 export const FullStackGrid = () => {
   return (

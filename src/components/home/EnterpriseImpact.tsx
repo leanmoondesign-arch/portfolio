@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ProjectModal } from '../ui/ProjectModal';
+import { ProjectIcons } from '../ui/ProjectIcons';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import type { CaseStudy } from '../../types';
 
@@ -154,12 +155,8 @@ export const EnterpriseImpact = () => {
                     {project.summary}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {project.stack.slice(0, 5).map((tech) => (
-                      <span key={tech} className="text-[11px] font-medium text-secondary/60 uppercase tracking-wider">
-                        #{tech}
-                      </span>
-                    ))}
+                  <div className="pt-2">
+                    <ProjectIcons techNames={project.stack} />
                   </div>
                 </div>
 

@@ -46,7 +46,7 @@ export const ProjectCard = ({ project, onClick }: Props) => {
           {project.summary}
         </p>
 
-        <div className="mt-auto flex flex-wrap gap-1.5 pt-4 items-center">
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
           <ProjectIcons techNames={project.stack} />
           {project.stack
             .filter(name => !stackTools.find(t => t.name.toLowerCase() === name.toLowerCase() || name.toLowerCase().includes(t.name.toLowerCase())))
@@ -54,7 +54,7 @@ export const ProjectCard = ({ project, onClick }: Props) => {
             .map((item, index) => (
             <span 
               key={`${project.id}-stack-${index}`} 
-              className="rounded-md border border-primary bg-primary/50 px-2.5 py-1 text-[10px] text-secondary uppercase tracking-wider font-medium transition-colors duration-500"
+              className="h-6 px-2 flex items-center rounded-md border border-primary bg-primary/50 text-[9px] text-secondary uppercase tracking-wider font-medium transition-colors duration-500"
             >
               {item}
             </span>
