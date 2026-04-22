@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { CaseStudy } from "../../types";
+import { ProjectIcons } from "./ProjectIcons";
+import { stackTools } from "./FullStackGrid";
 
 type Props = { 
   project: CaseStudy; 
@@ -44,8 +46,12 @@ export const ProjectCard = ({ project, onClick }: Props) => {
           {project.summary}
         </p>
 
-        <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
-          {project.stack.slice(0, 6).map((item, index) => (
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-4 items-center">
+          <ProjectIcons techNames={project.stack} />
+          {project.stack
+            .filter(name => !stackTools.find(t => t.name.toLowerCase() === name.toLowerCase() || name.toLowerCase().includes(t.name.toLowerCase())))
+            .slice(0, 3)
+            .map((item, index) => (
             <span 
               key={`${project.id}-stack-${index}`} 
               className="rounded-md border border-primary bg-primary/50 px-2.5 py-1 text-[10px] text-secondary uppercase tracking-wider font-medium transition-colors duration-500"
