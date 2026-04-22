@@ -90,9 +90,9 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                     e.stopPropagation();
                     setIsZoomed(false);
                   }}
-                  className="absolute top-6 right-6 p-4 rounded-full bg-amber-500 hover:bg-amber-600 text-white dark:bg-indigo-600 dark:hover:bg-indigo-500 shadow-[0_0_20px_rgba(0,0,0,0.3)] transition-all z-50 border border-amber-400 dark:border-indigo-400"
+                  className="absolute top-6 right-6 p-4 rounded-full bg-indigo-500/20 hover:bg-indigo-500/40 text-white backdrop-blur-xl border border-indigo-400/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all z-50 group"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 transition-transform group-hover:rotate-90" />
                 </button>
 
                 <div className="relative w-full h-full flex items-center justify-center p-4">
@@ -109,13 +109,13 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                     <>
                       <button
                         onClick={prevImage}
-                        className="absolute left-6 md:left-12 p-4 rounded-full bg-amber-500 hover:bg-amber-600 text-white dark:bg-indigo-600 dark:hover:bg-indigo-500 shadow-[0_0_20px_rgba(0,0,0,0.3)] transition-all border border-amber-400 dark:border-indigo-400"
+                        className="absolute left-6 md:left-12 p-4 rounded-full bg-indigo-500/20 hover:bg-indigo-500/40 text-white backdrop-blur-xl border border-indigo-400/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all active:scale-90"
                       >
                         <ChevronLeft className="w-8 h-8" />
                       </button>
                       <button
                         onClick={nextImage}
-                        className="absolute right-6 md:right-12 p-4 rounded-full bg-amber-500 hover:bg-amber-600 text-white dark:bg-indigo-600 dark:hover:bg-indigo-500 shadow-[0_0_20px_rgba(0,0,0,0.3)] transition-all border border-amber-400 dark:border-indigo-400"
+                        className="absolute right-6 md:right-12 p-4 rounded-full bg-indigo-500/20 hover:bg-indigo-500/40 text-white backdrop-blur-xl border border-indigo-400/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all active:scale-90"
                       >
                         <ChevronRight className="w-8 h-8" />
                       </button>

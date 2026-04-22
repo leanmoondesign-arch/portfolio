@@ -7,8 +7,8 @@
   --text-primary: #fafafa;
   --text-secondary: #a1a1aa;
   --border-primary: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(5, 5, 5, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(5, 5, 5, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.05);
   --accent-primary: #fb923c; /* Orange 400 */
   --accent-secondary: #a855f7; /* Purple 500 */
 }
@@ -20,7 +20,7 @@
   --text-primary: #0c4a6e; /* Sky 950 */
   --text-secondary: #334155; /* Slate 700 */
   --border-primary: rgba(14, 165, 233, 0.15); /* Sky blue hint */
-  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.3);
   --glass-border: rgba(14, 165, 233, 0.1);
   --accent-primary: #0ea5e9; /* Sky 500 - Celeste */
   --accent-secondary: #6366f1; /* Indigo 500 */
@@ -65,7 +65,7 @@
 
   .glass {
     background-color: var(--glass-bg);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     box-shadow: 0 4px 6px -1px var(--border-primary);
     transition: all 0.5s ease;
