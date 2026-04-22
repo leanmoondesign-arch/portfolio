@@ -41,7 +41,7 @@ export const Navbar = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-4"
       >
-        <div className="max-w-6xl mx-auto glass rounded-2xl px-4 md:px-6 py-2.5 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto navbar-glass rounded-2xl px-4 md:px-6 py-2.5 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <motion.button
               onClick={() => setIsMoon(!isMoon)}
@@ -111,7 +111,7 @@ export const Navbar = () => {
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className="md:hidden fixed bottom-6 left-4 right-4 z-50 pointer-events-none"
       >
-        <div className="glass rounded-[2rem] px-8 py-4 flex items-center justify-between pointer-events-auto border border-white/10 shadow-2xl">
+        <div className="navbar-glass rounded-[2rem] px-8 py-4 flex items-center justify-between pointer-events-auto border border-white/10 shadow-2xl">
           <MobileNavItem href="#about" icon={<User className="w-5 h-5" />} label="About" />
           <MobileNavItem href="#projects" icon={<Briefcase className="w-5 h-5" />} label="Projects" />
           <MobileNavItem href="#stack" icon={<Zap className="w-5 h-5" />} label="AI Stack" />

@@ -60,9 +60,9 @@ export const AIWorkflow = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-8 relative w-full">
+        <div className="flex flex-col xl:flex-row items-stretch gap-6 lg:gap-8 relative w-full">
           {/* Shimmer line connection */}
-          <div className="hidden lg:block absolute top-[40%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-secondary)]/20 to-transparent -z-10" />
+          <div className="hidden xl:block absolute top-[40%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-secondary)]/20 to-transparent -z-10" />
 
           {steps.map((step, index) => {
             const Icon = step.icon;
@@ -74,7 +74,7 @@ export const AIWorkflow = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="w-full h-full flex flex-col p-10 bg-secondary border border-primary rounded-[2.5rem] relative overflow-hidden transition-all duration-500 group-hover:border-[var(--accent-secondary)]/40 group-hover:shadow-[0_20px_50px_-20px_rgba(168,85,247,0.15)]"
+                  className="w-full h-full flex flex-col p-8 lg:p-10 bg-secondary border border-primary rounded-[2.5rem] relative overflow-hidden transition-all duration-500 group-hover:border-[var(--accent-secondary)]/40 group-hover:shadow-[0_20px_50px_-20px_rgba(168,85,247,0.15)]"
                 >
                   <div className="flex justify-between items-start mb-10">
                     <div className="w-12 h-12 rounded-2xl bg-[var(--accent-secondary)]/10 border border-[var(--accent-secondary)]/20 flex items-center justify-center text-[var(--accent-secondary)] group-hover:scale-110 group-hover:bg-[var(--accent-secondary)]/20 transition-all duration-500">

@@ -29,7 +29,7 @@ export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="relative min-h-[100svh] lg:h-screen flex flex-col justify-center px-6 pt-32 pb-20 overflow-hidden bg-primary transition-colors duration-500">
+    <section ref={containerRef} className="relative min-h-[100svh] flex flex-col justify-center px-6 pt-32 pb-20 overflow-hidden bg-primary transition-colors duration-500">
       {/* Background Elements - Now Static */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-[var(--accent-primary)]/5 rounded-full blur-[120px]" />
@@ -50,7 +50,7 @@ export const Hero = () => {
 
         <motion.h1
           variants={itemVariants}
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 text-primary transition-colors duration-500"
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-[clamp(4rem,12vw,9rem)] font-bold tracking-tighter mb-8 text-primary transition-colors duration-500 leading-[0.9]"
         >
           AI Product <span className="text-gradient">Architect</span>
         </motion.h1>
