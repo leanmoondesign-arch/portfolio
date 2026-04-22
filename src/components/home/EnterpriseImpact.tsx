@@ -171,7 +171,7 @@ export const EnterpriseImpact = () => {
                       Impacto Directo
                     </h4>
                     <ul className="space-y-4">
-                      {project.impact.map((imp, i) => (
+                      {project.impact?.map((imp, i) => (
                         <li key={i} className="flex items-start gap-4">
                           <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
                           <span className="text-sm text-secondary font-light leading-snug transition-colors duration-500">
