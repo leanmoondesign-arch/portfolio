@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "leandromoon-portfolio",
     "public": "dist",
     "ignore": [
       "firebase.json",
