@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { PenTool, BrainCircuit, Rocket } from 'lucide-react';
-import { FullStackGrid } from '../ui/FullStackGrid';
 
 const steps = [
   {
@@ -103,23 +102,6 @@ export const AIWorkflow = () => {
           })}
         </div>
 
-        {/* Stack Grid */}
-        <div className="mt-32">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl md:text-5xl font-bold text-primary tracking-tighter leading-[0.9] transition-colors duration-500">
-                Ecosistema <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600 dark:from-purple-500 dark:to-indigo-500">Tecnológico</span>
-              </h2>
-            </div>
-            <div className="max-w-sm">
-              <p className="text-secondary text-base font-light leading-relaxed transition-colors duration-500 border-l border-primary pl-8">
-                Herramientas y plataformas que utilizo para transformar ideas en productos digitales de alto impacto.
-              </p>
-            </div>
-          </div>
-          <FullStackGrid />
-        </div>
       </div>
     </section>
   );
