@@ -1,4 +1,3 @@
-import React from 'react';
 import { stackTools } from './FullStackGrid';
 
 interface ProjectIconsProps {
@@ -24,21 +23,12 @@ export const ProjectIcons = ({ techNames, className = "" }: ProjectIconsProps) =
         <div
           key={`${icon!.name}-${index}`}
           className="group relative flex items-center justify-center w-6 h-6 rounded-md bg-secondary/80 border border-primary/10 transition-all duration-300 hover:scale-110 hover:border-white/20 hover:bg-secondary"
-          style={{ '--brand-color': icon!.color } as React.CSSProperties}
           title={icon!.name}
         >
-          <div 
-            className="w-3 h-3 transition-all duration-300 bg-white/50 group-hover:bg-[var(--brand-color)]"
-            style={{
-              WebkitMaskImage: `url('/assets/stack/isotypes/${icon!.filename}')`,
-              WebkitMaskSize: 'contain',
-              WebkitMaskRepeat: 'no-repeat',
-              WebkitMaskPosition: 'center',
-              maskImage: `url('/assets/stack/isotypes/${icon!.filename}')`,
-              maskSize: 'contain',
-              maskRepeat: 'no-repeat',
-              maskPosition: 'center',
-            }}
+          <img 
+            src={`/assets/stack/isotypes/${icon!.filename}`}
+            alt={icon!.name}
+            className="w-4 h-4 transition-all duration-300 grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 object-contain"
           />
         </div>
       ))}
