@@ -88,7 +88,7 @@ export const Navbar = () => {
       </motion.nav>
 
       {/* Mobile Bottom App Bar */}
-      <motion.div
+      <motion.nav
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         className="md:hidden fixed bottom-6 left-4 right-4 z-50 pointer-events-none"
@@ -98,7 +98,7 @@ export const Navbar = () => {
           <MobileNavItem href="#projects" icon={<Briefcase className="w-5 h-5" />} label="Projects" />
           <MobileNavItem href="#stack" icon={<Zap className="w-5 h-5" />} label="AI Stack" />
         </div>
-      </motion.div>
+      </motion.nav>
     </>
   );
 };
