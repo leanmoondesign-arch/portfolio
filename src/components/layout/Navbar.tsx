@@ -5,6 +5,7 @@ import { Moon, Sun, User, Briefcase, Zap, Mail } from 'lucide-react';
 
 export const Navbar = () => {
   const [isMoon, setIsMoon] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
 
   // Efecto para manejar el cambio de tema en el DOM
   useEffect(() => {
@@ -14,6 +15,22 @@ export const Navbar = () => {
       document.documentElement.classList.add('light');
     }
   }, [isMoon]);
+
+  // Efecto para ocultar navbar en el fondo de la web
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      
+      // Ocultar si estamos muy cerca del final (ej. 100px)
+      const isAtBottom = (windowHeight + scrollTop) >= (documentHeight - 100);
+      setIsVisible(!isAtBottom);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -90,7 +107,8 @@ export const Navbar = () => {
       {/* Mobile Bottom App Bar */}
       <motion.nav
         initial={{ y: 100 }}
-        animate={{ y: 0 }}
+        animate={{ y: isVisible ? 0 : 120 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className="md:hidden fixed bottom-6 left-4 right-4 z-50 pointer-events-none"
       >
         <div className="glass rounded-[2rem] px-8 py-4 flex items-center justify-between pointer-events-auto border border-white/10 shadow-2xl">
