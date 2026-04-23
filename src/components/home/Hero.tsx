@@ -74,7 +74,7 @@ export const Hero = () => {
 
         <motion.h1
           variants={itemVariants}
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-[clamp(4.5rem,10vw,10rem)] font-bold tracking-tighter mb-8 text-primary transition-colors duration-500 leading-[0.85]"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-[clamp(4.5rem,10vw,10rem)] font-bold tracking-tighter mb-10 md:mb-12 text-primary transition-colors duration-500 leading-[0.85]"
         >
           AI Product <br />
           <span className="text-gradient">Architect</span>
@@ -82,7 +82,7 @@ export const Hero = () => {
 
         <motion.div
           variants={itemVariants}
-          className="max-w-2xl"
+          className="max-w-3xl lg:max-w-4xl"
         >
           <p className="text-xl md:text-2xl text-primary font-light transition-colors duration-500 leading-relaxed">
             Hola, soy <span className="font-bold">Leandro Moon</span> y traduzco problemas en soluciones reales mediante un flujo <span className="font-bold">End-to-End</span> potenciado por IA. Desde el <span className="font-bold">diseño de AI Skills</span> hasta la ejecución técnica, construyo productos digitales fluidos, escalables y con valor real para el usuario.
