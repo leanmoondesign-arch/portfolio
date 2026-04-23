@@ -10,7 +10,7 @@ const vaultProjects: CaseStudy[] = [
     title: 'Cuando SUBO Redesign',
     summary: "Soy usuario del transporte público y, como cualquier porteño, la app me frustraba. No por lo que le faltaba, sino porque en el momento que más la necesitás —apurado, en la calle, con el sol en la pantalla— fallaba. Tomé eso como punto de partida para proponer un rediseño desde cero, centrado en velocidad y claridad.",
     category: 'Personal',
-    stack: ['UX/UI Design', 'React', 'Firebase', 'APIs', 'Claude+Skills', 'GitHub'],
+    stack: ['UX/UI Design', 'Vibecoding', 'React', 'Firebase', 'APIs', 'Claude+Skills', 'GitHub'],
     images: Array.from({ length: 10 }, (_, i) => `/projects/subo-redesign/${i + 1}.webp`),
     impact: [
       "Flujo de carga reducido a 3 pasos",
@@ -27,7 +27,7 @@ const vaultProjects: CaseStudy[] = [
     title: 'Awaken Project',
     summary: "Soy fan de los videojuegos y tenía dificultades para sostener hábitos. Un día me pregunté: ¿qué pasaría si completar una rutina diaria se sintiera como subir de nivel? Awaken nació de esa pregunta. Una app que convierte hábitos en misiones, el progreso en experiencia, y los 66 días que tarda un hábito en consolidarse en una aventura que vale la pena terminar.",
     category: 'Personal',
-    stack: ['React', 'SQL', 'Auth & Security', 'Claude+Skills', 'Gemini/Codex', 'GitHub'],
+    stack: ['Vibecoding', 'React', 'SQL', 'Auth & Security', 'Claude+Skills', 'Gemini/Codex', 'GitHub'],
     images: Array.from({ length: 10 }, (_, i) => `/projects/awaken-project/${i + 1}.webp`),
     impact: [
       "Sistema de rachas con recompensas visuales inmediatas",
@@ -44,7 +44,7 @@ const vaultProjects: CaseStudy[] = [
     title: 'Cumbre Portfolio',
     summary: "En la facu nos pidieron hacer un portfolio en WordPress. A mí WordPress me resulta rígido, y mis compañeros no tenían experiencia en desarrollo web. Así que propuse hacer algo distinto: diseñé y desarrollé la landing desde cero con las herramientas que ya dominaba, usando IA como co-piloto, para llegar a un resultado que realmente nos representara.",
     category: 'Personal',
-    stack: ['React', 'Vite', 'DNS & APIs', 'Claude+Skills', 'Gemini/Codex', 'GitHub'],
+    stack: ['Vibecoding', 'React', 'Vite', 'DNS & APIs', 'Claude+Skills', 'Gemini/Codex', 'GitHub'],
     images: Array.from({ length: 10 }, (_, i) => `/projects/cumbre-portfolio/${i + 1}.webp`),
     impact: [
       "Performance 100/100 en Lighthouse",
@@ -83,7 +83,7 @@ export const DigitalVault = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-primary)] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-primary)]"></span>
                 </span>
-                Proactive Research & AI Solutions
+                Proactive Research & Vibecoding
               </div>
               
               <h2 className="text-4xl md:text-7xl font-bold text-primary tracking-tighter leading-[0.9] mb-8 transition-colors duration-500">

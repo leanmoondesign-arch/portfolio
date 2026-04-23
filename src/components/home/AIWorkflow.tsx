@@ -101,7 +101,6 @@ export const AIWorkflow = () => {
             );
           })}
         </div>
-
       </div>
     </section>
   );
