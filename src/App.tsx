@@ -3,7 +3,6 @@ import { Hero } from './components/home/Hero';
 import { About } from './components/home/About';
 import { EnterpriseImpact } from './components/home/EnterpriseImpact';
 import { DigitalVault } from './components/home/DigitalVault';
-import { AIWorkflow } from './components/home/AIWorkflow';
 import { Contact } from './components/home/Contact';
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
       <About />
       <EnterpriseImpact />
       <DigitalVault />
-      <AIWorkflow />
+      {/* <AIWorkflow /> */}
       <Contact />
     </Layout>
   );

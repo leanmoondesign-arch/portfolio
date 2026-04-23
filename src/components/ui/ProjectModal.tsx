@@ -332,7 +332,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                             <Cpu className="w-24 h-24" />
                           </div>
                           <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                            Vibecoding & Ejecución IA
+                            Workflow & Ejecución AI
                           </h3>
                           <p className="text-secondary text-sm leading-relaxed font-light relative z-10">
                             {data.execution}

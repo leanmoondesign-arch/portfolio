@@ -2,12 +2,39 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { CaseStudy } from "../../types";
 
+// Icons that get rendered as a single combo tag (no text, just icons side by side)
+const comboIcons = ['React', 'Vite', 'TypeScript', 'Node.js'];
+
+const stackIcons: Record<string, string> = {
+  'React': 'react.svg',
+  'Vite': 'vite.svg',
+  'TypeScript': 'typescript.svg',
+  'Node.js': 'nodejs.svg',
+  'Claude': 'claude-ai-icon.svg',
+  'Gemini/Codex': 'gemini.svg',
+  'AI Skills': 'antigravity.svg',
+  'GitHub': 'github.svg',
+  'Firebase': 'firebase.svg',
+  'Supabase': 'supabase.svg',
+  'AWS': 'aws.svg',
+  'Figma': 'figma.svg',
+  'Notion': 'notion.svg',
+  'Jira': 'jira.svg',
+  'Google Cloud': 'google-cloud.svg',
+  'PostgreSQL': 'postgresql.svg',
+  'VS Code': 'vscode.svg',
+};
+
 type Props = { 
   project: CaseStudy; 
   onClick: () => void;
 };
 
 export const ProjectCard = ({ project, onClick }: Props) => {
+  // Separate combo items from regular items
+  const comboItems = project.stack.filter(item => comboIcons.includes(item));
+  const regularItems = project.stack.filter(item => !comboIcons.includes(item));
+
   return (
     <motion.button
       type="button"
@@ -45,14 +72,56 @@ export const ProjectCard = ({ project, onClick }: Props) => {
         </p>
 
         <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
-          {project.stack.slice(0, 6).map((item, index) => (
-            <span 
-              key={`${project.id}-stack-${index}`} 
-              className="rounded-md border border-primary bg-primary/50 px-2.5 py-1 text-[10px] text-secondary uppercase tracking-wider font-medium transition-colors duration-500"
-            >
-              {item}
+          {/* Combo tag: React + Vite + TS + Node icons together */}
+          {comboItems.length > 0 && (
+            <span className="flex items-center gap-1 rounded-md border border-primary bg-primary/50 px-2 py-1 transition-colors duration-500">
+              {comboItems.map((item, i) => (
+                <span key={item} className="flex items-center gap-1">
+                  {i > 0 && <span className="text-[9px] text-secondary/40 font-bold">+</span>}
+                  <img 
+                    src={`/assets/stack/isotypes/${stackIcons[item]}`} 
+                    alt={item}
+                    title={item}
+                    className="w-3.5 h-3.5 object-contain isotype-img"
+                  />
+                </span>
+              ))}
             </span>
-          ))}
+          )}
+
+          {/* Regular stack tags */}
+          {regularItems.map((item, index) => {
+            const icon = stackIcons[item];
+            const isGeminiCodex = item === 'Gemini/Codex';
+            return (
+              <span 
+                key={`${project.id}-stack-${index}`} 
+                className="flex items-center gap-1.5 rounded-md border border-primary bg-primary/50 px-2.5 py-1 text-[10px] text-secondary uppercase tracking-wider font-medium transition-colors duration-500"
+              >
+                {isGeminiCodex ? (
+                  <>
+                    <img 
+                      src="/assets/stack/isotypes/gemini.svg" 
+                      alt="Gemini"
+                      className="w-3.5 h-3.5 object-contain isotype-img"
+                    />
+                    <img 
+                      src="/assets/stack/isotypes/codex.svg" 
+                      alt="Codex"
+                      className="w-3.5 h-3.5 object-contain isotype-img"
+                    />
+                  </>
+                ) : icon ? (
+                  <img 
+                    src={`/assets/stack/isotypes/${icon}`} 
+                    alt={item}
+                    className="w-3.5 h-3.5 object-contain isotype-img"
+                  />
+                ) : null}
+                {item}
+              </span>
+            );
+          })}
         </div>
 
         <div className="mt-4 border-t border-primary pt-3 flex justify-between items-center transition-colors duration-500">

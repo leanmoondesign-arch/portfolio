@@ -7,75 +7,65 @@ import type { CaseStudy } from '../../types';
 const vaultProjects: CaseStudy[] = [
   {
     id: 'subo-redesign',
-    title: 'Cuando SUBO Redesign',
-    summary: "Soy usuario del transporte público y, como cualquier porteño, la app me frustraba. No por lo que le faltaba, sino porque en el momento que más la necesitás —apurado, en la calle, con el sol en la pantalla— fallaba. Tomé eso como punto de partida para proponer un rediseño desde cero, centrado en velocidad y claridad.",
+    title: 'Cuando SUBO — Redesign',
+    summary: 'Propuesta de rediseño UX para resolver los principales pain points de la app de transporte público más usada de Buenos Aires, priorizando velocidad de acceso y usabilidad en contextos de movilidad real.',
     category: 'Personal',
-    stack: ['UX/UI Design', 'Vibecoding', 'React', 'Firebase', 'APIs', 'Claude+Skills', 'GitHub'],
+    stack: ['React', 'TypeScript', 'Vite', 'Node.js', 'Firebase', 'GitHub', 'Claude', 'Gemini/Codex', 'AI Skills'],
     images: Array.from({ length: 10 }, (_, i) => `/projects/subo-redesign/${i + 1}.webp`),
-    impact: [
-      "Flujo de carga reducido a 3 pasos",
-      "Interfaz de alto contraste optimizada para uso en exteriores",
-      "Sistema de notificaciones contextual, no invasivo"
-    ],
-    problem: "La app está diseñada para quien tiene tiempo de explorarla. Pero la movilidad urbana no funciona así: necesitás la información justa, en el momento justo, sin fricción. Cada segundo de confusión tiene un costo real.",
-    solution: "Investigué los flujos más usados y rediseñé la experiencia alrededor de ellos: consulta de saldo, carga y seguimiento de recorridos. Interfaz de alto contraste para usar al aire libre, flujo de carga reducido a tres pasos, y notificaciones que avisan cuando importa.",
     demo: 'https://cuando-subo-redesign.vercel.app/',
-    github: '#'
+    github: '#',
+    vision: 'Propuesta de rediseño UX para resolver los principales pain points de la app de transporte público más usada de Buenos Aires, priorizando velocidad de acceso y usabilidad en contextos de movilidad real.',
+    problem: 'La arquitectura de información de la app no responde a los casos de uso críticos del usuario en movimiento: consulta de saldo, carga y seguimiento de recorridos. La interfaz no está optimizada para uso en exteriores ni para interacciones de alta frecuencia y baja tolerancia al error.',
+    solution: 'Conduje un proceso de UX research basado en mi experiencia como usuario frecuente, mapeé los flujos críticos y rediseñé la arquitectura de información alrededor de las tres acciones más frecuentes. Interfaz de alto contraste para uso en exteriores, flujo de carga reducido a tres pasos y sistema de notificaciones contextual.',
+    execution: 'Skill de research en Claude para estructurar el análisis de pain points y generar las primeras hipótesis de rediseño. Las propuestas de UI fueron iteradas directamente en código con un Skill de front-end antes de entrar a Figma para el refinamiento final.',
+    impact: ['Flujo de carga reducido de 7+ pasos a 3.', 'Interfaz de alto contraste optimizada para legibilidad en exteriores.', 'Sistema de notificaciones contextual que reduce interrupciones innecesarias.'],
+    features: ['UX research y mapeo de pain points', 'Rediseño de arquitectura de información', 'Sistema de UI de alto contraste para uso en exteriores', 'Diseño de notificaciones contextual y no invasivo']
   },
   {
     id: 'awaken-project',
-    title: 'Awaken Project',
-    summary: "Soy fan de los videojuegos y tenía dificultades para sostener hábitos. Un día me pregunté: ¿qué pasaría si completar una rutina diaria se sintiera como subir de nivel? Awaken nació de esa pregunta. Una app que convierte hábitos en misiones, el progreso en experiencia, y los 66 días que tarda un hábito en consolidarse en una aventura que vale la pena terminar.",
+    title: 'Awaken — Habit Gamification',
+    summary: 'Plataforma de gamificación de hábitos construida sobre principios de behavioral design y el modelo de los 66 días. Desarrollada para resolver el problema principal de los habit trackers: la ausencia de recompensa psicológica inmediata.',
     category: 'Personal',
-    stack: ['Vibecoding', 'React', 'SQL', 'Auth & Security', 'Claude+Skills', 'Gemini/Codex', 'GitHub'],
+    stack: ['React', 'TypeScript', 'Vite', 'Node.js', 'Supabase', 'GitHub', 'Claude', 'Gemini/Codex', 'AI Skills'],
     images: Array.from({ length: 10 }, (_, i) => `/projects/awaken-project/${i + 1}.webp`),
-    impact: [
-      "Sistema de rachas con recompensas visuales inmediatas",
-      "Avatar que evoluciona según el progreso real del usuario",
-      "Arquitectura de datos escalable construida con Supabase y PostgreSQL"
-    ],
-    problem: "Los habit trackers son funcionales pero aburridos. No ofrecen ninguna recompensa psicológica inmediata, y eso hace que sean fáciles de abandonar. Si no sentís que algo avanza, dejás de hacerlo.",
-    solution: "Construí Awaken de punta a punta: desde la arquitectura de datos hasta la interfaz. Integré mecánicas de RPG —niveles, experiencia, rachas— a la gestión de tareas diarias. Cada hábito completado hace evolucionar a tu personaje. La base científica viene del modelo de los 66 días y principios de diseño de comportamiento, para que la gamificación tenga un propósito real y no sea solo estética.",
     demo: 'https://awaken-project.vercel.app/',
-    github: '#'
+    github: '#',
+    vision: 'Plataforma de gamificación de hábitos construida sobre principios de behavioral design y el modelo de los 66 días. Desarrollada para resolver el problema principal de los habit trackers: la ausencia de recompensa psicológica inmediata.',
+    problem: 'Los habit trackers existentes tienen tasas de abandono críticas porque no generan engagement sostenido. La ausencia de feedback loops positivos y recompensas inmediatas hace que el usuario pierda motivación antes de que el hábito se consolide.',
+    solution: 'Diseñé e implementé un sistema de gamificación con mecánicas de RPG: experiencia acumulable, niveles, rachas y un avatar que evoluciona con el progreso real del usuario. Cada hábito completado genera feedback inmediato y progresión visible.',
+    execution: 'Proyecto end-to-end con ownership total: arquitectura de datos en Supabase, desarrollo front-end y lógica de gamificación. Skill de arquitectura en Claude con los fundamentos científicos del modelo de hábitos y la lógica de progresión. Gemini Pro y Codex para la ejecución de componentes.',
+    impact: ['Sistema de recompensa visual inmediata impulsando la completitud diaria de hábitos.', 'Mecánicas de progresión RPG sosteniendo el engagement a largo plazo.', 'Arquitectura de datos escalable soportando tracking de múltiples hábitos.'],
+    features: ['Sistema de progresión basado en RPG: XP, niveles, rachas', 'Avatar que evoluciona con el progreso real del usuario', 'Modelo de consolidación de hábitos en 66 días', 'Arquitectura de datos escalable en Supabase + PostgreSQL']
   },
   {
     id: 'cumbre-portfolio',
-    title: 'Cumbre Portfolio',
-    summary: "En la facu nos pidieron hacer un portfolio en WordPress. A mí WordPress me resulta rígido, y mis compañeros no tenían experiencia en desarrollo web. Así que propuse hacer algo distinto: diseñé y desarrollé la landing desde cero con las herramientas que ya dominaba, usando IA como co-piloto, para llegar a un resultado que realmente nos representara.",
+    title: 'Cumbre — Agency Portfolio',
+    summary: 'Landing de alta performance para agencia creativa, desarrollada como alternativa técnica a WordPress con foco en velocidad de carga, animaciones fluidas y SEO optimizado.',
     category: 'Personal',
-    stack: ['Vibecoding', 'React', 'Vite', 'DNS & APIs', 'Claude+Skills', 'Gemini/Codex', 'GitHub'],
+    stack: ['React', 'TypeScript', 'Vite', 'Node.js', 'GitHub', 'Claude', 'Gemini/Codex', 'AI Skills'],
     images: Array.from({ length: 10 }, (_, i) => `/projects/cumbre-portfolio/${i + 1}.webp`),
-    impact: [
-      "Performance 100/100 en Lighthouse",
-      "Animaciones fluidas sin penalizar la carga inicial",
-      "Validación del flujo de trabajo con IA que uso profesionalmente"
-    ],
-    problem: "Las agencias creativas suelen tener sitios que pesan demasiado. El tiempo de carga penaliza la primera impresión, justamente cuando más importa.",
-    solution: "Desarrollé una SPA ultraligera con React y Vite, usando GSAP para animaciones de scroll que no comprometen la carga inicial. El proceso fue el mismo que aplico en el trabajo: Claude para planificar y maquetar, Gemini y Codex para ejecutar, con skills personalizados para cada componente y prompts refinados para minimizar alucinaciones.",
     demo: 'https://cumbreportfolio.vercel.app/',
-    github: '#'
+    github: '#',
+    vision: 'Landing de alta performance para agencia creativa, desarrollada como alternativa técnica a WordPress con foco en velocidad de carga, animaciones fluidas y SEO optimizado.',
+    problem: 'El brief original requería WordPress, una plataforma que genera overhead técnico innecesario para un sitio de alta carga visual. La primera impresión de una agencia creativa no puede verse comprometida por tiempo de carga.',
+    solution: 'Propuse y desarrollé una SPA ultraligera con React y Vite, usando GSAP para animaciones de scroll que no penalizan la carga inicial. El resultado fue un sitio con Performance 100/100 en Lighthouse.',
+    execution: 'Skill de front-end en Claude con el criterio visual del proyecto y las restricciones del stack. Codex para la ejecución de componentes. Primer proyecto donde validé en producción el workflow AI-assisted que luego escalé a los proyectos de Peabody.',
+    impact: ['Lighthouse Performance score: 100/100.', 'Animaciones GSAP sin impacto en el tiempo de carga inicial.', 'Primera validación en producción del workflow AI-assisted.'],
+    features: ['SPA ultraligera: React + Vite', 'Animaciones de scroll con GSAP', 'Optimización SEO desde el build inicial', 'Workflow AI-assisted: Claude Skill + Codex']
   }
 ];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
 export const DigitalVault = () => {
   const [selectedProject, setSelectedProject] = useState<CaseStudy | null>(null);
-
   return (
     <>
       <section id="vault" className="py-32 relative px-6 z-10 bg-primary transition-colors duration-500">
         <div className="max-w-6xl mx-auto relative z-10">
-          {/* Section Header - Redesigned for Proactive Criteria */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-24">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-[var(--accent-primary)] text-[10px] font-bold uppercase tracking-[0.2em] mb-8 transition-colors duration-500">
@@ -85,50 +75,29 @@ export const DigitalVault = () => {
                 </span>
                 Proactive Research & Vibecoding
               </div>
-              
               <h2 className="text-4xl md:text-7xl font-bold text-primary tracking-tighter leading-[0.9] mb-8 transition-colors duration-500">
-                Criterio en <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400 dark:from-cyan-400 dark:to-emerald-400">Movimiento</span>
+                Experimentos <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400 dark:from-cyan-400 dark:to-emerald-400">Personales.</span>
               </h2>
-              
               <div className="flex items-center gap-4">
                 <div className="h-[1px] w-12 bg-primary/20 transition-colors duration-500" />
-                <span className="text-secondary font-mono text-sm tracking-widest uppercase transition-colors duration-500">
-                  Exploraciones Personales & Side Projects
-                </span>
+                <span className="text-secondary font-mono text-sm tracking-widest uppercase transition-colors duration-500">Side Projects</span>
               </div>
             </div>
-
             <div className="max-w-sm">
               <p className="text-secondary text-lg font-light leading-relaxed transition-colors duration-500 border-l border-primary pl-8">
                 Mi proactividad va más allá de la empresa. Estos proyectos reflejan mi estilo de diseño y criterio estratégico, orientados siempre a proveer la solución más empática y eficiente para el usuario.
               </p>
             </div>
           </div>
-
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {vaultProjects.map((project) => (
-              <ProjectCard 
-                key={project.id}
-                project={project}
-                onClick={() => setSelectedProject(project)}
-              />
+              <ProjectCard key={project.id} project={project} onClick={() => setSelectedProject(project)} />
             ))}
           </motion.div>
         </div>
       </section>
-
-      <ProjectModal 
-        isOpen={selectedProject !== null} 
-        onClose={() => setSelectedProject(null)} 
-        data={selectedProject} 
-      />
+      <ProjectModal isOpen={selectedProject !== null} onClose={() => setSelectedProject(null)} data={selectedProject} />
     </>
   );
 };

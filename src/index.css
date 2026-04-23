@@ -10,6 +10,8 @@
   --glass-bg: rgba(5, 5, 5, 0.5);
   --glass-border: rgba(255, 255, 255, 0.1);
   --accent-primary: #fb923c; /* Orange 400 */
+  --accent-primary-rgb: 251, 146, 60;
+  --accent-primary-faded: rgba(251, 146, 60, 0.1);
   --accent-secondary: #a855f7; /* Purple 500 */
 }
 
@@ -23,6 +25,8 @@
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(14, 165, 233, 0.15);
   --accent-primary: #0ea5e9; /* Sky 500 - Celeste */
+  --accent-primary-rgb: 14, 165, 233;
+  --accent-primary-faded: rgba(14, 165, 233, 0.2);
   --accent-secondary: #6366f1; /* Indigo 500 */
 }
 
@@ -110,5 +114,25 @@
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: var(--accent-primary);
+  }
+
+  /* Isotype Theme Adaptation - Only for Jira and Miro */
+  .isotype-img {
+    transition: filter 0.5s ease, opacity 0.3s ease;
+  }
+
+  /* Dark Mode: Jira and Miro white */
+  .dark .isotype-img[alt="Jira"],
+  .dark .isotype-img[alt="Miro"] {
+    filter: brightness(0) invert(1) !important;
+  }
+
+  /* Light Mode: Adjust specific icons to be black for visibility */
+  .light .isotype-img[alt="Jira"],
+  .light .isotype-img[alt="Miro"],
+  .light .isotype-img[alt="GitHub"],
+  .light .isotype-img[alt="Codex"],
+  .light .isotype-img[alt="AWS"] {
+    filter: brightness(0) !important;
   }
 }

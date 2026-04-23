@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, Sun, User, Briefcase, Zap, Mail } from 'lucide-react';
+import { Moon, Sun, House, Briefcase, Zap, Mail } from 'lucide-react';
 
 export const Navbar = () => {
   const [isMoon, setIsMoon] = useState(true);
@@ -10,8 +10,10 @@ export const Navbar = () => {
   // Efecto para manejar el cambio de tema en el DOM
   useEffect(() => {
     if (isMoon) {
+      document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
     } else {
+      document.documentElement.classList.remove('dark');
       document.documentElement.classList.add('light');
     }
   }, [isMoon]);
@@ -85,14 +87,14 @@ export const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <NavItem href="#about">About</NavItem>
+            <NavItem href="#hero">About</NavItem>
+            <NavItem href="#about">Workflow</NavItem>
             <NavItem href="#projects">Projects</NavItem>
-            <NavItem href="#stack">AI Stack</NavItem>
           </div>
 
           <div className="flex items-center gap-4">
             {/* Desktop Contact Button */}
-            <a href="#contact" className="hidden md:flex px-4 py-2 text-sm font-medium bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-primary rounded-lg border border-primary transition-all active:scale-95 duration-500">
+            <a href="#contact" className="hidden md:flex px-4 py-2 text-sm font-medium bg-transparent hover:bg-secondary text-primary rounded-lg border border-primary transition-all active:scale-95 duration-500">
               Contactar
             </a>
             
@@ -111,10 +113,10 @@ export const Navbar = () => {
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className="md:hidden fixed bottom-6 left-4 right-4 z-50 pointer-events-none"
       >
-        <div className="navbar-glass rounded-[2rem] px-8 py-4 flex items-center justify-between pointer-events-auto border border-white/10 shadow-2xl">
-          <MobileNavItem href="#about" icon={<User className="w-5 h-5" />} label="About" />
+        <div className="navbar-glass rounded-[2rem] px-8 py-4 flex items-center justify-between pointer-events-auto border border-primary shadow-2xl transition-colors duration-500">
+          <MobileNavItem href="#hero" icon={<House className="w-5 h-5" />} label="About" />
+          <MobileNavItem href="#about" icon={<Zap className="w-5 h-5" />} label="Workflow" />
           <MobileNavItem href="#projects" icon={<Briefcase className="w-5 h-5" />} label="Projects" />
-          <MobileNavItem href="#stack" icon={<Zap className="w-5 h-5" />} label="AI Stack" />
         </div>
       </motion.nav>
     </>

@@ -1,6 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 import { useRef } from 'react';
+import cvPath from '../../assets/Moon_Leandro_2026.pdf';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -29,11 +29,35 @@ export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="relative min-h-[100svh] flex flex-col justify-center px-6 pt-32 pb-20 overflow-hidden bg-primary transition-colors duration-500">
-      {/* Background Elements - Now Static */}
+    <section id="hero" ref={containerRef} className="relative min-h-[100svh] flex flex-col justify-center px-6 pt-32 pb-20 overflow-hidden bg-primary transition-colors duration-500">
+      {/* Background Elements - Now Animated */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-[var(--accent-primary)]/5 rounded-full blur-[120px]" />
-        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-[var(--accent-secondary)]/5 rounded-full blur-[100px]" />
+        <motion.div
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-[var(--accent-primary)]/10 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -40, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-[20%] -right-[5%] w-[40%] h-[40%] bg-[var(--accent-secondary)]/10 rounded-full blur-[100px]"
+        />
       </div>
 
       <motion.div
@@ -50,54 +74,63 @@ export const Hero = () => {
 
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-[clamp(4rem,12vw,9rem)] font-bold tracking-tighter mb-8 text-primary transition-colors duration-500 leading-[0.9]"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-[clamp(4.5rem,10vw,10rem)] font-bold tracking-tighter mb-8 text-primary transition-colors duration-500 leading-[0.85]"
         >
-          AI Product <span className="text-gradient">Architect</span>
+          AI Product <br />
+          <span className="text-gradient">Architect</span>
         </motion.h1>
 
         <motion.div
           variants={itemVariants}
-          className="max-w-2xl space-y-6"
+          className="max-w-2xl"
         >
           <p className="text-xl md:text-2xl text-primary font-light transition-colors duration-500 leading-relaxed">
-            Hola, mi nombre es Leandro Moon y soy una persona con facilidad para escuchar e identificar <span className="italic">problemas</span>, y una curiosidad innata por resolverlos.
-          </p>
-          <p className="text-sm md:text-base text-secondary font-light leading-relaxed transition-colors duration-500 opacity-80">
-            Creo que el diseño es, ante todo, un acto de empatía. Mi rol es ser el puente comunicativo donde la estrategia del negocio y la necesidad humana dejan de ser opuestos para convertirse en una solución.
+            Hola, soy <span className="font-bold">Leandro Moon</span> y traduzco problemas en soluciones reales mediante un flujo <span className="font-bold">End-to-End</span> potenciado por IA. Desde el <span className="font-bold">diseño de AI Skills</span> hasta la ejecución técnica, construyo productos digitales fluidos, escalables y con valor real para el usuario.
           </p>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="flex flex-row items-center gap-6 mt-12">
+        {/* Unified Actions Row */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8 mt-14"
+        >
           <a
             href="#projects"
-            style={{ backgroundColor: 'var(--accent-primary)', boxShadow: '0 10px 30px -10px var(--accent-primary)' }}
-            className="group relative px-10 py-4 rounded-2xl text-white font-bold transition-all hover:scale-105 hover:brightness-110 active:scale-95 text-xs tracking-widest uppercase"
+            style={{ backgroundColor: 'var(--accent-primary)', boxShadow: '0 15px 40px -15px var(--accent-primary)' }}
+            className="group relative px-10 py-5 rounded-2xl text-white font-bold transition-all hover:scale-105 hover:brightness-110 active:scale-95 text-[10px] tracking-[0.2em] uppercase whitespace-nowrap"
           >
             Ver Proyectos
           </a>
-          <a
-            href="#contact"
-            className="group flex items-center gap-2 text-primary hover:text-[var(--accent-primary)] transition-all text-xs font-bold tracking-widest uppercase"
-          >
-            Hablemos
-            <span className="w-8 h-[1px] bg-primary group-hover:bg-[var(--accent-primary)] transition-all duration-300" />
-          </a>
-        </motion.div>
-      </motion.div>
 
-      {/* Static Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 text-primary z-10 hover:text-[var(--accent-primary)] transition-colors cursor-default"
-      >
-        <span className="italic text-[10px] uppercase tracking-[0.4em] font-light opacity-30">Explorar</span>
-        <motion.div
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
+          <div className="flex items-center gap-x-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
+            <a
+              href={cvPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-[var(--accent-primary)] transition-all relative group"
+            >
+              CV
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--accent-primary)] group-hover:w-full transition-all duration-300" />
+            </a>
+            <span className="opacity-10 text-primary">/</span>
+            <a
+              href="https://www.linkedin.com/in/leanmoon/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-[var(--accent-primary)] transition-all relative group"
+            >
+              LinkedIn
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--accent-primary)] group-hover:w-full transition-all duration-300" />
+            </a>
+            <span className="opacity-10 text-primary">/</span>
+            <a
+              href="#contact"
+              className="text-primary hover:text-[var(--accent-primary)] transition-all relative group"
+            >
+              Hablemos
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--accent-primary)] group-hover:w-full transition-all duration-300" />
+            </a>
+          </div>
         </motion.div>
       </motion.div>
     </section>
