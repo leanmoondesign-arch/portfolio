@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import type { CaseStudy } from "../../types";
+import type { CaseStudy } from "../../i18n/projects";
+import { useLanguage } from "../../context/LanguageContext";
+import { AnimatedText } from "./AnimatedText";
 
 // Icons that get rendered as a single combo tag (no text, just icons side by side)
 const comboIcons = ['React', 'Vite', 'TypeScript', 'Node.js'];
@@ -31,6 +33,7 @@ type Props = {
 };
 
 export const ProjectCard = ({ project, onClick }: Props) => {
+  const { t } = useLanguage();
   // Separate combo items from regular items
   const comboItems = project.stack.filter(item => comboIcons.includes(item));
   const regularItems = project.stack.filter(item => !comboIcons.includes(item));
@@ -126,10 +129,10 @@ export const ProjectCard = ({ project, onClick }: Props) => {
 
         <div className="mt-4 border-t border-primary pt-3 flex justify-between items-center transition-colors duration-500">
           <span className="rounded-md border border-primary bg-primary/30 px-2.5 py-1 text-[10px] text-secondary font-semibold uppercase tracking-wide">
-            {project.category === "Work" ? "Enterprise" : "Personal"}
+            <AnimatedText text={project.category === "Work" ? t('common.enterprise') : t('common.personal')} />
           </span>
-          <span className="text-[10px] text-indigo-500 font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-            Ver Caso →
+          <span className="text-[10px] text-indigo-500 font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+            <AnimatedText text={t('common.view_case')} /> →
           </span>
         </div>
       </div>

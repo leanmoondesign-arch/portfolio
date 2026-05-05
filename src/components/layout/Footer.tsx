@@ -1,5 +1,9 @@
+import { useLanguage } from '../../context/LanguageContext';
+import { AnimatedText } from '../ui/AnimatedText';
 
 export const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="w-full border-t border-primary py-12 px-6 bg-primary relative z-10 transition-colors duration-500">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -16,7 +20,7 @@ export const Footer = () => {
           <span className="font-mono text-[9px] uppercase tracking-[0.4em]">Leandro Moon &copy; 2026</span>
           <div className="hidden md:block h-4 w-[1px] bg-primary/20" />
           <span className="text-[10px] font-mono tracking-widest italic flex items-center gap-2">
-            Transformando la fricción en fluidez.
+            <AnimatedText text={t('footer.tagline')} />
           </span>
         </div>
       </div>

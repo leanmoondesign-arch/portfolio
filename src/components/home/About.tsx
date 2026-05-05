@@ -1,7 +1,14 @@
 import { motion } from 'framer-motion';
-
+import { useLanguage } from '../../context/LanguageContext';
+import { AnimatedText } from '../ui/AnimatedText';
 
 export const About = () => {
+  const { t } = useLanguage();
+
+  const getTranslatedSteps = () => {
+    return t('about.steps') as string[];
+  };
+
   return (
     <section id="about" className="py-24 relative px-6 z-10 bg-primary transition-colors duration-500 overflow-hidden">
       {/* Background decoration */}
@@ -16,8 +23,8 @@ export const About = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-6xl font-bold text-primary tracking-tight leading-[1.1]">
-            No diseño pantallas, <br />
-            <span className="text-gradient">diseño experiencias</span> que resuelven problemas.
+            <AnimatedText text={t('about.title1')} /> <br />
+            <AnimatedText text={t('about.title2')} className="text-gradient" /> <AnimatedText text={t('about.title3')} />
           </h2>
         </motion.div>
 
@@ -30,7 +37,7 @@ export const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <p className="text-lg md:text-xl text-secondary font-light leading-relaxed">
-              Mi proceso trasciende lo visual: convierto <span className="text-primary font-semibold">wireframes en MVPs funcionales</span> mediante un workflow que utiliza <span className="text-primary font-semibold">AI Skills</span> para acelerar la arquitectura y el desarrollo. Me hago cargo del <span className="text-primary font-semibold">ciclo completo</span> para ser el <span className="text-primary font-semibold">puente comunicativo</span> donde la estrategia del negocio y la necesidad humana dejan de ser opuestos para convertirse en una solución con <span className="text-primary font-semibold">impacto real</span>.
+              <AnimatedText html={true} text={t('about.desc1')} />
             </p>
           </motion.div>
 
@@ -42,17 +49,10 @@ export const About = () => {
             className="p-6 rounded-2xl bg-secondary/50 border border-primary glass-card"
           >
             <div className="flex flex-wrap items-center gap-x-2 gap-y-3">
-              {[
-                "Detecto el problema",
-                "Arquitectura y MVP",
-                "Claude + Skills",
-                "Gemini o Codex",
-                "GitHub + Firebase",
-                "Itero con datos"
-              ].map((step, i, arr) => (
+              {getTranslatedSteps().map((step: string, i: number, arr: string[]) => (
                 <div key={step} className="flex items-center gap-2">
                   <span className="px-3 py-1.5 rounded-xl border border-[var(--accent-primary)] text-[10px] md:text-[11px] font-bold uppercase tracking-wider text-primary bg-[var(--accent-primary-faded)] transition-colors">
-                    {step}
+                    <AnimatedText text={step} />
                   </span>
                   {i < arr.length - 1 && (
                     <span className="text-[var(--accent-primary)] font-bold opacity-30">
@@ -74,13 +74,13 @@ export const About = () => {
           className="mb-8"
         >
           <h3 className="text-2xl md:text-3xl font-bold text-primary tracking-tight">
-            Stack <span className="text-gradient">Tecnológico</span>
+            <AnimatedText text={t('about.stack_title')} /> <AnimatedText text={t('about.stack_gradient')} className="text-gradient" />
           </h3>
-          <p className="text-secondary text-sm mt-2 font-light">Las herramientas que potencian mi flujo de trabajo.</p>
+          <p className="text-secondary text-sm mt-2 font-light"><AnimatedText text={t('about.stack_desc')} /></p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           <StackCard
-            title="Gestión & Arquitectura"
+            title={t('about.cat_mgmt')}
             tools={[
               { name: "Figma", icon: "figma.svg" },
               { name: "Notion", icon: "notion.svg" },
@@ -92,7 +92,7 @@ export const About = () => {
             index={0}
           />
           <StackCard
-            title="AI & Desarrollo"
+            title={t('about.cat_ai')}
             tools={[
               { name: "Claude", icon: "claude-ai-icon.svg" },
               { name: "Gemini", icon: "gemini.svg" },
@@ -104,7 +104,7 @@ export const About = () => {
             index={1}
           />
           <StackCard
-            title="Deploy, Data & Cloud"
+            title={t('about.cat_cloud')}
             tools={[
               { name: "Firebase", icon: "firebase.svg" },
               { name: "Google Cloud", icon: "google-cloud.svg" },
@@ -134,7 +134,7 @@ const StackCard = ({ title, tools, index }: { title: string, tools: Tool[], inde
     transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
     className="p-6 rounded-2xl bg-primary/30 border border-primary transition-all duration-300 group"
   >
-    <h4 className="text-primary font-bold mb-6 text-sm uppercase tracking-widest opacity-70">{title}</h4>
+    <h4 className="text-primary font-bold mb-6 text-sm uppercase tracking-widest opacity-70"><AnimatedText text={title} /></h4>
     <div className="grid grid-cols-3 gap-y-8 gap-x-4">
       {tools.map((tool) => (
         <div key={tool.name} className="flex flex-col items-center gap-2 group/tool">

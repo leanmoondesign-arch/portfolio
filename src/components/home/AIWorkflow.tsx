@@ -1,35 +1,38 @@
 import { motion } from 'framer-motion';
 import { PenTool, BrainCircuit, Rocket } from 'lucide-react';
-
-const steps = [
-  {
-    id: '01',
-    title: 'Architecture & UX',
-    tools: 'Information Architecture / Product Thinking / UX Flows',
-    description: 'Identificar problemas, definir oportunidades y diseñar la arquitectura para transformar necesidades en MVPs funcionales.',
-    icon: PenTool,
-  },
-  {
-    id: '02',
-    title: 'AI Native Coding',
-    tools: 'Claude + Custom AI Skills + Gemini/Codex + MCPs',
-    description: 'IA como núcleo de desarrollo para prototipar, iterar y validar soluciones.',
-    icon: BrainCircuit,
-  },
-  {
-    id: '03',
-    title: 'Deploy & Cloud',
-    tools: 'Firebase/Supabase + Vercel/Netlify + Node.js + APIs + GitHub',
-    description: 'Integración continua, base de datos en tiempo real y desarrollo de soluciones digitales con iteración continua/escalabilidad.',
-    icon: Rocket,
-  }
-];
+import { useLanguage } from '../../context/LanguageContext';
+import { AnimatedText } from '../ui/AnimatedText';
 
 export const AIWorkflow = () => {
+  const { t } = useLanguage();
+
+  const steps = [
+    {
+      id: '01',
+      title: t('workflow.steps.s1.title'),
+      tools: t('workflow.steps.s1.tools'),
+      description: t('workflow.steps.s1.desc'),
+      icon: PenTool,
+    },
+    {
+      id: '02',
+      title: t('workflow.steps.s2.title'),
+      tools: t('workflow.steps.s2.tools'),
+      description: t('workflow.steps.s2.desc'),
+      icon: BrainCircuit,
+    },
+    {
+      id: '03',
+      title: t('workflow.steps.s3.title'),
+      tools: t('workflow.steps.s3.tools'),
+      description: t('workflow.steps.s3.desc'),
+      icon: Rocket,
+    }
+  ];
+
   return (
-    <section id="stack" className="py-32 relative px-6 z-10 bg-primary transition-colors duration-500">
+    <section id="workflow" className="py-32 relative px-6 z-10 bg-primary transition-colors duration-500">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header - Redesigned for Pro Narrative */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-24">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-secondary)]/10 border border-[var(--accent-secondary)]/20 text-[var(--accent-secondary)] text-[10px] font-bold uppercase tracking-[0.2em] mb-8 transition-colors duration-500">
@@ -37,31 +40,29 @@ export const AIWorkflow = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-secondary)] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-secondary)]"></span>
               </span>
-              AI Implementation Pipeline
+              <AnimatedText text={t('workflow.tag')} />
             </div>
 
             <h2 className="text-4xl md:text-7xl font-bold text-primary tracking-tighter leading-[0.9] mb-8 transition-colors duration-500">
-              Pipeline de <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600 dark:from-purple-500 dark:to-indigo-500">Arquitectura & IA</span>
+              <AnimatedText text={t('workflow.title')} />
             </h2>
 
             <div className="flex items-center gap-4">
               <div className="h-[1px] w-12 bg-[var(--accent-secondary)] opacity-50 transition-colors duration-500" />
               <span className="text-secondary font-mono text-sm tracking-widest uppercase transition-colors duration-500">
-                Diseño como disciplina integradora
+                <AnimatedText text={t('workflow.subtitle')} />
               </span>
             </div>
           </div>
 
           <div className="max-w-sm">
             <p className="text-secondary text-lg font-light leading-relaxed transition-colors duration-500 border-l border-primary pl-8">
-              Utilizo la Inteligencia Artificial no como un atajo, sino como una herramienta que permite materializar productos con velocidad, sin perder el foco en el usuario.
+              <AnimatedText text={t('workflow.desc')} />
             </p>
           </div>
         </div>
 
         <div className="flex flex-col xl:flex-row items-stretch gap-6 lg:gap-8 relative w-full">
-          {/* Shimmer line connection */}
           <div className="hidden xl:block absolute top-[40%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-secondary)]/20 to-transparent -z-10" />
 
           {steps.map((step, index) => {
@@ -84,17 +85,17 @@ export const AIWorkflow = () => {
                   </div>
 
                   <h3 className="text-2xl font-bold text-primary mb-3 transition-colors duration-500">
-                    {step.title}
+                    <AnimatedText text={step.title} />
                   </h3>
 
                   <div className="mb-6">
                     <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] leading-snug transition-colors duration-500">
-                      <span className="text-[var(--accent-secondary)]">/</span> {step.tools}
+                      <span className="text-[var(--accent-secondary)]">/</span> <AnimatedText text={step.tools} />
                     </p>
                   </div>
 
                   <p className="text-secondary font-light leading-relaxed transition-colors duration-500">
-                    {step.description}
+                    <AnimatedText text={step.description} />
                   </p>
                 </motion.div>
               </div>

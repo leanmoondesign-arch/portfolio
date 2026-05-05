@@ -1,6 +1,9 @@
 import { motion, type Variants } from 'framer-motion';
 import { useRef } from 'react';
-import cvPath from '../../assets/Moon_Leandro_2026.pdf';
+import { useLanguage } from '../../context/LanguageContext';
+import { AnimatedText } from '../ui/AnimatedText';
+import cvPathES from '../../assets/Moon_Leandro_2026.pdf';
+import cvPathEN from '../../assets/Moon_Leandro_ENG.pdf';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -27,6 +30,9 @@ const itemVariants: Variants = {
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { language, t } = useLanguage();
+  
+  const currentCvPath = language === 'en' ? cvPathEN : cvPathES;
 
   return (
     <section id="hero" ref={containerRef} className="relative min-h-[100svh] flex flex-col justify-center px-6 pt-32 pb-20 overflow-hidden bg-primary transition-colors duration-500">
@@ -68,7 +74,7 @@ export const Hero = () => {
       >
         <motion.div variants={itemVariants} className="mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-[var(--accent-primary)] text-[10px] font-bold uppercase tracking-[0.2em]">
-            Welcome | Intro
+            <AnimatedText text={t('hero.welcome')} />
           </div>
         </motion.div>
 
@@ -76,8 +82,8 @@ export const Hero = () => {
           variants={itemVariants}
           className="text-6xl sm:text-7xl md:text-8xl lg:text-[clamp(4.5rem,10vw,10rem)] font-bold tracking-tighter mb-10 md:mb-12 text-primary transition-colors duration-500 leading-[0.85]"
         >
-          AI Product <br />
-          <span className="text-gradient">Architect</span>
+          <AnimatedText text={t('hero.title1')} /> <br />
+          <AnimatedText text={t('hero.title2')} className="text-gradient" />
         </motion.h1>
 
         <motion.div
@@ -85,7 +91,7 @@ export const Hero = () => {
           className="max-w-3xl lg:max-w-4xl"
         >
           <p className="text-xl md:text-2xl text-primary font-light transition-colors duration-500 leading-relaxed">
-            Hola, soy <span className="font-bold">Leandro Moon</span> y traduzco problemas en soluciones reales mediante un flujo <span className="font-bold">End-to-End</span> potenciado por IA. Desde el <span className="font-bold">diseño de AI Skills</span> hasta la ejecución técnica, construyo productos digitales fluidos, escalables y con valor real para el usuario.
+            <AnimatedText html={true} text={t('hero.description')} />
           </p>
         </motion.div>
 
@@ -99,17 +105,17 @@ export const Hero = () => {
             style={{ backgroundColor: 'var(--accent-primary)', boxShadow: '0 15px 40px -15px var(--accent-primary)' }}
             className="group relative px-10 py-5 rounded-2xl text-white font-bold transition-all hover:scale-105 hover:brightness-110 active:scale-95 text-[10px] tracking-[0.2em] uppercase whitespace-nowrap"
           >
-            Ver Proyectos
+            <AnimatedText text={t('hero.cta')} />
           </a>
 
           <div className="flex items-center gap-x-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
             <a
-              href={cvPath}
+              href={currentCvPath}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-[var(--accent-primary)] transition-all relative group"
             >
-              CV
+              <AnimatedText text={t('hero.cv')} />
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--accent-primary)] group-hover:w-full transition-all duration-300" />
             </a>
             <span className="opacity-10 text-primary">/</span>
@@ -119,7 +125,7 @@ export const Hero = () => {
               rel="noopener noreferrer"
               className="text-primary hover:text-[var(--accent-primary)] transition-all relative group"
             >
-              LinkedIn
+              <AnimatedText text={t('hero.linkedin')} />
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--accent-primary)] group-hover:w-full transition-all duration-300" />
             </a>
             <span className="opacity-10 text-primary">/</span>
@@ -127,7 +133,7 @@ export const Hero = () => {
               href="#contact"
               className="text-primary hover:text-[var(--accent-primary)] transition-all relative group"
             >
-              Hablemos
+              <AnimatedText text={t('hero.talk')} />
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--accent-primary)] group-hover:w-full transition-all duration-300" />
             </a>
           </div>

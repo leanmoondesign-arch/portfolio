@@ -1,24 +1,56 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, ExternalLink, FileText, CheckCircle2, Loader2 } from 'lucide-react';
-import cvPath from '../../assets/Moon_Leandro_2026.pdf';
+import { useLanguage } from '../../context/LanguageContext';
+import { AnimatedText } from '../ui/AnimatedText';
+import cvPathES from '../../assets/Moon_Leandro_2026.pdf';
+import cvPathEN from '../../assets/Moon_Leandro_ENG.pdf';
 
 export const Contact = () => {
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const { language, t } = useLanguage();
+  
+  const currentCvPath = language === 'en' ? cvPathEN : cvPathES;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSending(true);
 
-    // Simulamos el envío (Target: leanmoon148@gmail.com)
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+      _subject: 'Nuevo contacto desde tu Portfolio Web!',
+      _template: 'box', // Plantilla de email bonita
+      _autoresponse: '¡Hola! Recibí tu mensaje correctamente. Estaré leyendo tu desafío y me comunicaré contigo a la brevedad. Saludos, Leandro Moon.'
+    };
 
-    setIsSending(false);
-    setIsSent(true);
+    try {
+      // Usamos el token generado por FormSubmit para mayor seguridad en vez del email en texto plano
+      const response = await fetch("https://formsubmit.co/ajax/6819b6780b51ce66c941461aa9b06420", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
 
-    // Reset tras 5 segundos
-    setTimeout(() => setIsSent(false), 5000);
+      if (response.ok) {
+        setIsSent(true);
+        e.currentTarget.reset(); // Limpiar el formulario
+      } else {
+        console.error("Error al enviar el formulario");
+      }
+    } catch (error) {
+      console.error("Error de conexión:", error);
+    } finally {
+      setIsSending(false);
+      // Reset tras 5 segundos
+      setTimeout(() => setIsSent(false), 5000);
+    }
   };
 
   return (
@@ -38,30 +70,30 @@ export const Contact = () => {
           >
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-[var(--accent-primary)] text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
-                Inquiry
+                <AnimatedText text={t('contact.tag')} />
               </div>
               <h2 className="text-6xl md:text-8xl font-bold tracking-tighter text-primary transition-colors duration-500">
-                <span className="text-gradient">Hablemos.</span>
+                <AnimatedText text={t('contact.title')} className="text-gradient" />
               </h2>
             </div>
 
             <div className="grid grid-cols-1 gap-10">
               <div className="space-y-3">
-                <p className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500">Based in</p>
-                <p className="text-xl text-primary font-light transition-colors duration-500">Buenos Aires, Argentina</p>
+                <p className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500"><AnimatedText text={t('contact.based')} /></p>
+                <p className="text-xl text-primary font-light transition-colors duration-500"><AnimatedText text={t('contact.based_val')} /></p>
               </div>
 
               <div className="space-y-3">
-                <p className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500">Professional Focus</p>
+                <p className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500"><AnimatedText text={t('contact.focus')} /></p>
                 <p className="text-sm text-primary font-light leading-relaxed transition-colors duration-500 max-w-sm">
-                  Digital Product Architecture & AI Solutions Strategy. Soluciones con impacto real, mediante diseño empático.
+                  <AnimatedText text={t('contact.focus_val')} />
                 </p>
               </div>
 
               <div className="space-y-3">
-                <p className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500">Ideal Fit</p>
+                <p className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500"><AnimatedText text={t('contact.ideal')} /></p>
                 <p className="text-sm text-primary font-light leading-relaxed transition-colors duration-500 max-w-sm">
-                  Compañías forward-thinking que busquen perfiles integrales para materializar soluciones reales mediante criterio de diseño y ejecución potenciada por IA.
+                  <AnimatedText text={t('contact.ideal_val')} />
                 </p>
               </div>
             </div>
@@ -74,16 +106,16 @@ export const Contact = () => {
                 className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-secondary border border-primary text-xs text-primary font-bold hover:bg-primary transition-all duration-300"
               >
                 <ExternalLink className="w-4 h-4" />
-                LinkedIn
+                <AnimatedText text={t('contact.btn_linkedin')} />
               </a>
               <a
-                href={cvPath}
+                href={currentCvPath}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-xs text-[var(--accent-primary)] font-bold hover:bg-[var(--accent-primary)] hover:text-white transition-all duration-300"
               >
                 <FileText className="w-4 h-4" />
-                Ver CV
+                <AnimatedText text={t('contact.btn_cv')} />
               </a>
             </div>
           </motion.div>
@@ -101,33 +133,44 @@ export const Contact = () => {
               </div>
 
               <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+                {/* Honey pot para evitar spam bots (recomendado por formsubmit) */}
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-primary uppercase tracking-widest ml-1">Tu Email</label>
+                    <label htmlFor="form-email" className="text-[10px] font-bold text-primary uppercase tracking-widest ml-1">{t('contact.form_email')}</label>
                     <input
                       required
+                      id="form-email"
                       type="email"
-                      placeholder="hola@empresa.com"
+                      name="email"
+                      autoComplete="email"
+                      placeholder={t('contact.form_email_ph')}
                       className="w-full px-6 py-4 rounded-2xl bg-primary/40 border border-primary focus:border-[var(--accent-primary)] focus:ring-1 focus:ring-[var(--accent-primary)] outline-none transition-all text-primary placeholder:text-secondary/30"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-primary uppercase tracking-widest ml-1">Tu Nombre</label>
+                    <label htmlFor="form-name" className="text-[10px] font-bold text-primary uppercase tracking-widest ml-1">{t('contact.form_name')}</label>
                     <input
                       required
+                      id="form-name"
                       type="text"
-                      placeholder="Nombre Apellido"
+                      name="name"
+                      autoComplete="name"
+                      placeholder={t('contact.form_name_ph')}
                       className="w-full px-6 py-4 rounded-2xl bg-primary/40 border border-primary focus:border-[var(--accent-primary)] focus:ring-1 focus:ring-[var(--accent-primary)] outline-none transition-all text-primary placeholder:text-secondary/30"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-primary uppercase tracking-widest ml-1">A qué te gustaría dar fluidez?</label>
+                  <label htmlFor="form-message" className="text-[10px] font-bold text-primary uppercase tracking-widest ml-1">{t('contact.form_message')}</label>
                   <textarea
                     required
+                    id="form-message"
                     rows={4}
-                    placeholder="Contame brevemente tu desafío..."
+                    name="message"
+                    placeholder={t('contact.form_message_ph')}
                     className="w-full px-6 py-4 rounded-2xl bg-primary/40 border border-primary focus:border-[var(--accent-primary)] focus:ring-1 focus:ring-[var(--accent-primary)] outline-none transition-all text-primary placeholder:text-secondary/30 resize-none"
                   />
                 </div>
@@ -140,15 +183,15 @@ export const Contact = () => {
                   {isSending ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      Enviando...
+                      {t('contact.btn_sending')}
                     </>
                   ) : isSent ? (
                     <>
                       <CheckCircle2 className="w-4 h-4" />
-                      Mensaje Enviado
+                      {t('contact.btn_sent')}
                     </>
                   ) : (
-                    "Enviar Mensaje"
+                    <AnimatedText text={t('contact.btn_send')} />
                   )}
                 </button>
               </form>
@@ -166,15 +209,15 @@ export const Contact = () => {
                       <div className="w-16 h-16 bg-[var(--accent-primary)]/10 rounded-full flex items-center justify-center mx-auto">
                         <CheckCircle2 className="w-8 h-8 text-[var(--accent-primary)]" />
                       </div>
-                      <h3 className="text-xl font-bold text-primary">¡Mensaje enviado!</h3>
+                      <h3 className="text-xl font-bold text-primary">{t('contact.success_title')}</h3>
                       <p className="text-sm text-secondary font-light leading-relaxed">
-                        Mensaje enviado correctamente. Me pondré en contacto a la brevedad.
+                        {t('contact.success_desc')}
                       </p>
                       <button
                         onClick={() => setIsSent(false)}
                         className="text-[10px] font-bold text-[var(--accent-primary)] uppercase tracking-widest hover:underline"
                       >
-                        Cerrar
+                        {t('contact.close')}
                       </button>
                     </div>
                   </motion.div>

@@ -1,7 +1,32 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, GitBranch, Target, Zap, Lightbulb, Compass, Cpu, CheckCircle, Image as ImageIcon, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import type { CaseStudy } from '../../types';
+import type { CaseStudy } from "../../i18n/projects";
+import { useLanguage } from '../../context/LanguageContext';
+import { AnimatedText } from '../ui/AnimatedText';
+
+// Icons that get rendered as a single combo tag (no text, just icons side by side)
+const comboIcons = ['React', 'Vite', 'TypeScript', 'Node.js'];
+
+const stackIcons: Record<string, string> = {
+  'React': 'react.svg',
+  'Vite': 'vite.svg',
+  'TypeScript': 'typescript.svg',
+  'Node.js': 'nodejs.svg',
+  'Claude': 'claude-ai-icon.svg',
+  'Gemini/Codex': 'gemini.svg',
+  'AI Skills': 'antigravity.svg',
+  'GitHub': 'github.svg',
+  'Firebase': 'firebase.svg',
+  'Supabase': 'supabase.svg',
+  'AWS': 'aws.svg',
+  'Figma': 'figma.svg',
+  'Notion': 'notion.svg',
+  'Jira': 'jira.svg',
+  'Google Cloud': 'google-cloud.svg',
+  'PostgreSQL': 'postgresql.svg',
+  'VS Code': 'vscode.svg',
+};
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -13,6 +38,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [validImages, setValidImages] = useState<string[]>([]);
+  const { t } = useLanguage();
 
   // Initialize and synchronize valid images
   useEffect(() => {
@@ -145,7 +171,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                 <div className="h-5 w-[1px] bg-primary opacity-20" />
                 <div className="flex flex-col">
                   <span className="text-[10px] font-mono text-indigo-500 uppercase tracking-[0.3em] leading-none mb-1">
-                    Project Architecture
+                    <AnimatedText text={t('modal.arch')} />
                   </span>
                   <span className="text-sm font-bold text-primary tracking-tight leading-none">
                     {data.title}
@@ -178,11 +204,56 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                     {data.title}
                   </h2>
                   <div className="flex flex-wrap gap-2">
-                    {data.stack.map((tech, i) => (
-                      <span key={`${data.id}-tech-${i}`} className="px-3 py-1.5 rounded-lg bg-secondary border border-primary text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest transition-colors duration-500">
-                        {tech}
+                    {/* Combo tag: React + Vite + TS + Node icons together */}
+                    {data.stack.filter(item => comboIcons.includes(item)).length > 0 && (
+                      <span className="flex items-center gap-1.5 rounded-lg border border-primary bg-primary/50 px-3 py-1.5 transition-colors duration-500">
+                        {data.stack.filter(item => comboIcons.includes(item)).map((item, i) => (
+                          <span key={item} className="flex items-center gap-1.5">
+                            {i > 0 && <span className="text-[10px] text-secondary/40 font-bold">+</span>}
+                            <img 
+                              src={`/assets/stack/isotypes/${stackIcons[item]}`} 
+                              alt={item}
+                              title={item}
+                              className="w-4 h-4 object-contain isotype-img"
+                            />
+                          </span>
+                        ))}
                       </span>
-                    ))}
+                    )}
+
+                    {/* Regular stack tags */}
+                    {data.stack.filter(item => !comboIcons.includes(item)).map((item, index) => {
+                      const icon = stackIcons[item];
+                      const isGeminiCodex = item === 'Gemini/Codex';
+                      return (
+                        <span 
+                          key={`${data.id}-stack-${index}`} 
+                          className="flex items-center gap-2 rounded-lg border border-primary bg-primary/50 px-3 py-1.5 text-[10px] md:text-xs text-secondary uppercase tracking-widest font-bold transition-colors duration-500"
+                        >
+                          {isGeminiCodex ? (
+                            <>
+                              <img 
+                                src="/assets/stack/isotypes/gemini.svg" 
+                                alt="Gemini"
+                                className="w-4 h-4 object-contain isotype-img"
+                              />
+                              <img 
+                                src="/assets/stack/isotypes/codex.svg" 
+                                alt="Codex"
+                                className="w-4 h-4 object-contain isotype-img"
+                              />
+                            </>
+                          ) : icon ? (
+                            <img 
+                              src={`/assets/stack/isotypes/${icon}`} 
+                              alt={item}
+                              className="w-4 h-4 object-contain isotype-img"
+                            />
+                          ) : null}
+                          {item}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -192,7 +263,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                     <div className="flex items-center justify-between mb-14 pt-8">
                       <div className="flex items-center gap-3 text-primary">
                         <ImageIcon className="w-5 h-5" />
-                        <h3 className="font-bold uppercase tracking-[0.2em] text-xs">Preview</h3>
+                        <h3 className="font-bold uppercase tracking-[0.2em] text-xs"><AnimatedText text={t('modal.preview')} /></h3>
                       </div>
 
                       {validImages.length > 1 && (
@@ -237,7 +308,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest border border-white/30">
                               <Maximize2 className="w-3 h-3" />
-                              Ver en Pantalla Completa
+                              <AnimatedText text={t('modal.fullscreen')} />
                             </div>
                           </div>
                         </motion.div>
@@ -274,7 +345,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                       <section>
                         <div className="flex items-center gap-3 mb-6 text-indigo-500">
                           <Lightbulb className="w-5 h-5" />
-                          <h3 className="font-bold uppercase tracking-[0.2em] text-xs">Visión Estratégica</h3>
+                          <h3 className="font-bold uppercase tracking-[0.2em] text-xs"><AnimatedText text={t('modal.vision')} /></h3>
                         </div>
                         <p className="text-primary text-xl md:text-2xl font-light leading-relaxed transition-colors duration-500 italic border-l-2 border-indigo-500/30 pl-6">
                           "{data.vision || data.summary}"
@@ -287,7 +358,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                       <section className="p-8 rounded-3xl bg-secondary/20 border border-primary transition-colors duration-500">
                         <div className="flex items-center gap-3 mb-4 text-red-500/70">
                           <Target className="w-4 h-4" />
-                          <h3 className="font-bold uppercase tracking-[0.2em] text-[10px]">Problemática</h3>
+                          <h3 className="font-bold uppercase tracking-[0.2em] text-[10px]"><AnimatedText text={t('modal.problem')} /></h3>
                         </div>
                         <p className="text-secondary text-sm leading-relaxed font-light transition-colors duration-500">
                           {data.problem}
@@ -296,7 +367,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                       <section className="p-8 rounded-3xl bg-emerald-500/5 border border-emerald-500/20 transition-colors duration-500">
                         <div className="flex items-center gap-3 mb-4 text-emerald-500/70">
                           <Zap className="w-4 h-4" />
-                          <h3 className="font-bold uppercase tracking-[0.2em] text-[10px]">Solución Arquitectada</h3>
+                          <h3 className="font-bold uppercase tracking-[0.2em] text-[10px]"><AnimatedText text={t('modal.solution')} /></h3>
                         </div>
                         <p className="text-secondary text-sm leading-relaxed font-light transition-colors duration-500">
                           {data.solution}
@@ -309,7 +380,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                       <section>
                         <div className="flex items-center gap-3 mb-8 text-primary">
                           <Cpu className="w-5 h-5" />
-                          <h3 className="font-bold uppercase tracking-[0.2em] text-xs">Funcionalidades Clave</h3>
+                          <h3 className="font-bold uppercase tracking-[0.2em] text-xs"><AnimatedText text={t('modal.features')} /></h3>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {data.features.map((feature, i) => (
@@ -324,22 +395,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                       </section>
                     )}
 
-                    {/* Execution / Vibecoding */}
-                    {data.execution && (
-                      <section>
-                        <div className="p-8 rounded-3xl bg-indigo-500/5 border border-indigo-500/20 relative overflow-hidden group transition-colors duration-500">
-                          <div className="absolute top-0 right-0 p-4 opacity-10">
-                            <Cpu className="w-24 h-24" />
-                          </div>
-                          <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                            Workflow & Ejecución AI
-                          </h3>
-                          <p className="text-secondary text-sm leading-relaxed font-light relative z-10">
-                            {data.execution}
-                          </p>
-                        </div>
-                      </section>
-                    )}
+
                   </div>
 
                   {/* Sidebar / High Impact Results */}
@@ -347,7 +403,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                     <div className="p-8 rounded-[2rem] bg-primary border border-primary shadow-xl transition-all duration-500 sticky top-12">
                       <div className="flex items-center gap-3 mb-8 text-emerald-500">
                         <Zap className="w-6 h-6" />
-                        <h3 className="font-bold uppercase tracking-[0.2em] text-xs">Impacto & Valor</h3>
+                        <h3 className="font-bold uppercase tracking-[0.2em] text-xs"><AnimatedText text={t('modal.impact')} /></h3>
                       </div>
                       <ul className="space-y-6">
                         {data.impact?.map((res, i) => (
@@ -363,7 +419,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                           <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20 mb-4 transition-colors duration-500">
                             <h4 className="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-3 flex items-center gap-2">
                               <X className="w-3 h-3" />
-                              Nota de Privacidad
+                              <AnimatedText text={t('modal.privacy')} />
                             </h4>
                             <p className="text-xs text-secondary leading-relaxed font-light">
                               {data.privacyNotice}
@@ -386,14 +442,14 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                                 whileTap={{ scale: 0.98 }}
                                 className="flex items-center justify-between p-4 rounded-xl bg-secondary border border-primary text-primary font-bold text-[10px] tracking-widest transition-all hover:border-indigo-500/50"
                               >
-                                EXPLORAR PROYECTO
+                                <AnimatedText text={t('modal.btn_explore')} />
                                 <div className="bg-indigo-500/10 p-2 rounded-lg text-indigo-500">
                                   <ExternalLink className="w-4 h-4" />
                                 </div>
                               </motion.a>
                             ) : Array.isArray(data.demo) ? (
                               <div className="space-y-3">
-                                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest px-1">Links del Ecosistema</span>
+                                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest px-1"><AnimatedText text={t('modal.links')} /></span>
                                 {data.demo.map((link, idx) => (
                                   <motion.a
                                     key={idx}
@@ -418,7 +474,7 @@ export const ProjectModal = ({ isOpen, onClose, data }: ProjectModalProps) => {
                         )}
                         {data.github && data.github !== '#' && (
                           <a href={data.github} target="_blank" rel="noopener" className="flex items-center justify-between p-4 rounded-2xl bg-secondary text-primary font-bold text-xs transition-all hover:bg-primary hover:text-secondary active:scale-[0.98]">
-                            REPOSITORIO
+                            <AnimatedText text={t('modal.repo')} />
                             <GitBranch className="w-4 h-4" />
                           </a>
                         )}

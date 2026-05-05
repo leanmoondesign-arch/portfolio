@@ -1,11 +1,13 @@
-
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, House, Briefcase, Zap, Mail } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
+import { AnimatedText } from '../ui/AnimatedText';
 
 export const Navbar = () => {
   const [isMoon, setIsMoon] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
+  const { language, toggleLanguage, t } = useLanguage();
 
   // Efecto para manejar el cambio de tema en el DOM
   useEffect(() => {
@@ -47,36 +49,62 @@ export const Navbar = () => {
           <div className="flex items-center gap-4">
             <motion.button
               onClick={() => setIsMoon(!isMoon)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`group relative p-2 rounded-lg border transition-all duration-300 flex items-center justify-center w-10 h-10 ${isMoon
-                ? 'bg-indigo-500/10 border-indigo-500/20 shadow-[0_0_15px_-3px_rgba(99,102,241,0.2)]'
-                : 'bg-amber-500/10 border-amber-500/20 shadow-[0_0_15px_-3px_rgba(245,158,11,0.2)]'
+              whileTap={{ scale: 0.85 }}
+              animate={{ 
+                boxShadow: isMoon 
+                  ? [
+                      "0 0 4px rgba(99, 102, 241, 0.15)", 
+                      "0 0 24px rgba(99, 102, 241, 0.45)", 
+                      "0 0 4px rgba(99, 102, 241, 0.15)"
+                    ]
+                  : [
+                      "0 0 4px rgba(245, 158, 11, 0.15)", 
+                      "0 0 24px rgba(245, 158, 11, 0.45)", 
+                      "0 0 4px rgba(245, 158, 11, 0.15)"
+                    ]
+              }}
+              transition={{ 
+                boxShadow: {
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+              className={`relative p-2 rounded-xl border transition-all duration-500 flex items-center justify-center w-11 h-11 cursor-pointer ${isMoon
+                ? 'bg-indigo-500/15 border-indigo-500/40 text-indigo-400'
+                : 'bg-amber-500/15 border-amber-500/40 text-amber-400'
                 }`}
             >
               <AnimatePresence mode="wait" initial={false}>
                 {isMoon ? (
                   <motion.div
                     key="moon"
-                    initial={{ y: 20, opacity: 0, rotate: 45, scale: 0.5 }}
-                    animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ y: -20, opacity: 0, rotate: -45, scale: 0.5 }}
+                    initial={{ y: 10, opacity: 0, rotate: 45 }}
+                    animate={{ y: 0, opacity: 1, rotate: 0 }}
+                    exit={{ y: -10, opacity: 0, rotate: -45 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <Moon className="w-5 h-5 text-indigo-400 fill-indigo-400/20" />
+                    <Moon className="w-5 h-5 fill-current" />
                   </motion.div>
                 ) : (
                   <motion.div
                     key="sun"
-                    initial={{ y: 20, opacity: 0, rotate: -45, scale: 0.5 }}
-                    animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ y: -20, opacity: 0, rotate: 45, scale: 0.5 }}
+                    initial={{ y: 10, opacity: 0, rotate: -45 }}
+                    animate={{ y: 0, opacity: 1, rotate: 0 }}
+                    exit={{ y: -10, opacity: 0, rotate: 45 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <Sun className="w-5 h-5 text-amber-400 fill-amber-400/20" />
+                    <Sun className="w-5 h-5 fill-current" />
                   </motion.div>
                 )}
               </AnimatePresence>
+              
+              {/* Animated glow ring */}
+              <motion.div 
+                className={`absolute inset-0 rounded-xl border-2 ${isMoon ? 'border-indigo-400' : 'border-amber-400'}`}
+                animate={{ opacity: [0.15, 0.5, 0.15] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              />
             </motion.button>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -87,15 +115,51 @@ export const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <NavItem href="#hero">About</NavItem>
-            <NavItem href="#about">Workflow</NavItem>
-            <NavItem href="#projects">Projects</NavItem>
+            <NavItem href="#hero"><AnimatedText text={t('nav.about')} /></NavItem>
+            <NavItem href="#about"><AnimatedText text={t('nav.workflow')} /></NavItem>
+            <NavItem href="#projects"><AnimatedText text={t('nav.projects')} /></NavItem>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <motion.button
+              onClick={toggleLanguage}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 p-2 px-3 rounded-lg bg-secondary/50 border border-primary transition-all duration-300 hover:border-indigo-500/50"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {language === 'es' ? (
+                  <motion.div
+                    key="es"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-sm">🇦🇷</span>
+                    <span className="text-xs font-bold text-primary tracking-widest">ES</span>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="en"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-sm">🇺🇸</span>
+                    <span className="text-xs font-bold text-primary tracking-widest">EN</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+
             {/* Desktop Contact Button */}
             <a href="#contact" className="hidden md:flex px-4 py-2 text-sm font-medium bg-transparent hover:bg-secondary text-primary rounded-lg border border-primary transition-all active:scale-95 duration-500">
-              Contactar
+              <AnimatedText text={t('nav.contact')} />
             </a>
             
             {/* Mobile Contact Icon */}
@@ -114,9 +178,9 @@ export const Navbar = () => {
         className="md:hidden fixed bottom-6 left-4 right-4 z-50 pointer-events-none"
       >
         <div className="navbar-glass rounded-[2rem] px-8 py-4 flex items-center justify-between pointer-events-auto border border-primary shadow-2xl transition-colors duration-500">
-          <MobileNavItem href="#hero" icon={<House className="w-5 h-5" />} label="About" />
-          <MobileNavItem href="#about" icon={<Zap className="w-5 h-5" />} label="Workflow" />
-          <MobileNavItem href="#projects" icon={<Briefcase className="w-5 h-5" />} label="Projects" />
+          <MobileNavItem href="#hero" icon={<House className="w-5 h-5" />} label={t('nav.about')} />
+          <MobileNavItem href="#about" icon={<Zap className="w-5 h-5" />} label={t('nav.workflow')} />
+          <MobileNavItem href="#projects" icon={<Briefcase className="w-5 h-5" />} label={t('nav.projects')} />
         </div>
       </motion.nav>
     </>
@@ -138,7 +202,7 @@ const MobileNavItem = ({ href, icon, label }: { href: string; icon: React.ReactN
       {icon}
     </div>
     <span className="text-[9px] uppercase font-bold tracking-[0.1em] opacity-50 group-hover:opacity-100 transition-opacity">
-      {label}
+      <AnimatedText text={label} />
     </span>
   </a>
 );
