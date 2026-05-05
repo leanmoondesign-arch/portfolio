@@ -138,7 +138,7 @@ export const Navbar = () => {
                     transition={{ duration: 0.2 }}
                     className="flex items-center gap-2"
                   >
-                    <span className="text-sm">🇦🇷</span>
+                    <img src="https://flagcdn.com/ar.svg" width="16" alt="Argentina" className="rounded-sm shadow-sm" />
                     <span className="text-xs font-bold text-primary tracking-widest">ES</span>
                   </motion.div>
                 ) : (
@@ -150,7 +150,7 @@ export const Navbar = () => {
                     transition={{ duration: 0.2 }}
                     className="flex items-center gap-2"
                   >
-                    <span className="text-sm">🇺🇸</span>
+                    <img src="https://flagcdn.com/us.svg" width="16" alt="United States" className="rounded-sm shadow-sm" />
                     <span className="text-xs font-bold text-primary tracking-widest">EN</span>
                   </motion.div>
                 )}

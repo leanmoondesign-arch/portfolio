@@ -78,8 +78,8 @@
 
   .navbar-glass {
     background-color: var(--glass-bg);
-    backdrop-filter: blur(8px) saturate(180%) contrast(110%) brightness(1.1);
-    -webkit-backdrop-filter: blur(8px) saturate(180%) contrast(110%) brightness(1.1);
+    backdrop-filter: blur(16px) saturate(180%) contrast(110%) brightness(1.1);
+    -webkit-backdrop-filter: blur(16px) saturate(180%) contrast(110%) brightness(1.1);
     border: 1px solid var(--glass-border);
     transition: all 0.5s ease;
   }
