@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { ProjectModal } from '../ui/ProjectModal';
 import { ProjectCard } from '../ui/ProjectCard';
-import type { CaseStudy } from '../../i18n/projects';
 import { useLanguage } from '../../context/LanguageContext';
 import { AnimatedText } from '../ui/AnimatedText';
 import { getVaultProjects } from '../../i18n/projects';
