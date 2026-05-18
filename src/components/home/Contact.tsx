@@ -17,32 +17,27 @@ export const Contact = () => {
     e.preventDefault();
     setIsSending(true);
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
-      _subject: 'Nuevo contacto desde tu Portfolio Web!',
-      _template: 'box', // Plantilla de email bonita
-      _autoresponse: '¡Hola! Recibí tu mensaje correctamente. Estaré leyendo tu desafío y me comunicaré contigo a la brevedad. Saludos, Leandro Moon.'
-    };
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    // Web3Forms access key
+    formData.append("access_key", "87746858-7bbf-4bab-8713-608e327e2823");
+    formData.append("subject", "Nuevo contacto desde tu Portfolio Web!");
+    formData.append("from_name", "Portfolio Contact Form");
 
     try {
-      // Usamos el token generado por FormSubmit para mayor seguridad en vez del email en texto plano
-      const response = await fetch("https://formsubmit.co/ajax/6819b6780b51ce66c941461aa9b06420", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: formData
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         setIsSent(true);
-        e.currentTarget.reset(); // Limpiar el formulario
+        form.reset();
       } else {
-        console.error("Error al enviar el formulario");
+        console.error("Error al enviar el formulario:", data.message);
       }
     } catch (error) {
       console.error("Error de conexión:", error);
@@ -133,8 +128,8 @@ export const Contact = () => {
               </div>
 
               <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
-                {/* Honey pot para evitar spam bots (recomendado por formsubmit) */}
-                <input type="text" name="_honey" style={{ display: 'none' }} />
+                {/* Honeypot para evitar spam bots (Web3Forms) */}
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
